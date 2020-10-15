@@ -290,15 +290,7 @@ public class GenerateMaze : MonoBehaviour
         }
 
         _exit = tCorners[exitIndex];
-        for (int i = 0; i < corners.Length; i++)
-        {
-            Debug.Log($"{i} {Vector3.Distance(_exit, corners[i])}");
-            if (Vector3.Distance(_exit, corners[i]) <= 0.1f)
-            {
-                Instantiate(doorPrefab, corners[i] + Vector3.forward * (i == 0 || i == 1 ? 0.5f : -0.5f) + Vector3.up * 0.5f, Quaternion.identity);
-                break;
-            }
-        }
+        Instantiate(doorPrefab, _exit + Vector3.forward * ((int)_exit.z > 0 ? 0.5f : -0.5f) + Vector3.up * 0.5f, Quaternion.identity);
 
         for (int i = 1; i < tCorners.Length; i++)
         { 
