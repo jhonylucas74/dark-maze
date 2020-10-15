@@ -7,7 +7,10 @@ using UnityEngine.AI;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class GenerateMaze : MonoBehaviour
 {
-    public GameObject Wall;
+    public GameObject wallPrefab;
+    public GameObject doorPrefab;
+    public GameObject keyPrefab;
+
     public int width = 7, height = 7;
     static int N = 1, S = 2, E = 4, W = 8;
     Dictionary<int, int> DX = new Dictionary<int, int>(){
@@ -23,6 +26,11 @@ public class GenerateMaze : MonoBehaviour
   };
 
     int[,] grid;
+
+    private Vector3[] vertices;
+    private Mesh mesh;
+
+    Vector3 _entrance, _key, _exit;
 
     int[] getRandomDirections()
     {
@@ -67,7 +75,7 @@ public class GenerateMaze : MonoBehaviour
     void BuildWall(Vector3 i, Vector3 j)
     {
         Quaternion rotation = Quaternion.Euler(0, i.x == j.x ? 90 : 0, 0);
-        Instantiate(Wall, new Vector3(i.x + ((j.x - i.x) / 2), 0.5f, i.z + ((j.z - i.z) / 2)), rotation, transform);
+        Instantiate(wallPrefab, new Vector3(i.x + ((j.x - i.x) / 2), 0.5f, i.z + ((j.z - i.z) / 2)), rotation, transform);
     }
 
     void BuildVertical(int pos)
@@ -160,8 +168,6 @@ public class GenerateMaze : MonoBehaviour
         Debug.Log(text);
     }
 
-    private Vector3[] vertices;
-    private Mesh mesh;
     private void Generate()
     {
         GetComponent<MeshFilter>().mesh = mesh = new Mesh();
@@ -226,11 +232,11 @@ public class GenerateMaze : MonoBehaviour
         }
 
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(entrance, 0.1f);
+        Gizmos.DrawSphere(_entrance, 0.1f);
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(exit, 0.1f);
+        Gizmos.DrawSphere(_exit, 0.1f);
         Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(key, 0.1f);
+        Gizmos.DrawSphere(_key, 0.1f);
     }
 
     void Awake()
@@ -264,36 +270,47 @@ public class GenerateMaze : MonoBehaviour
         corners[1] = new Vector3(width - 0.5f, 0f, height - 0.5f);
         corners[2] = new Vector3(width - 0.5f, 0f, 0.5f);
         corners[3] = new Vector3(0.5f, 0f, 0.5f);
-        corners.Shuffle();
+
+        Vector3[] tCorners = corners;
+        tCorners.Shuffle();
 
         GetComponent<NavMeshSurface>().BuildNavMesh();
         
-        entrance = corners[0];
+        _entrance = tCorners[0];
 
         int exitIndex = 0;
         NavMeshHit navHit;
         float highestDist = 0f;
-        for(int i = 0; i < corners.Length; i++)
+        for(int i = 0; i < tCorners.Length; i++)
         {
-            NavMesh.SamplePosition(corners[i], out navHit, Mathf.Infinity, new NavMeshQueryFilter());
+            NavMesh.SamplePosition(tCorners[i], out navHit, Mathf.Infinity, new NavMeshQueryFilter());
 
             if(navHit.distance > highestDist)
                 exitIndex = i;
         }
 
-        exit = corners[exitIndex];
-
-        for (int i = 1; i < corners.Length; i++)
-        { 
-            if(i != exitIndex)
+        _exit = tCorners[exitIndex];
+        for (int i = 0; i < corners.Length; i++)
+        {
+            Debug.Log($"{i} {Vector3.Distance(_exit, corners[i])}");
+            if (Vector3.Distance(_exit, corners[i]) <= 0.1f)
             {
-                key = corners[i];
+                Instantiate(doorPrefab, corners[i] + Vector3.forward * (i == 0 || i == 1 ? 0.5f : -0.5f) + Vector3.up * 0.5f, Quaternion.identity);
                 break;
             }
         }
 
-        Events.OnMazeGenerated?.Invoke(corners[0]);
-    }
+        for (int i = 1; i < tCorners.Length; i++)
+        { 
+            if(i != exitIndex)
+            {
+                _key = tCorners[i];
+                break;
+            }
+        }
 
-    Vector3 entrance, key, exit;
+        Instantiate(keyPrefab, _key + Vector3.up * 0.25f, Quaternion.identity);
+
+        Events.OnMazeGenerated?.Invoke(tCorners[0]);
+    }
 }
