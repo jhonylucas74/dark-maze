@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 253673061154577284}
   - component: {fileID: 8781971987671067850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LampLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 8566762476969064587}
   - component: {fileID: 8566762476969064585}
   - component: {fileID: 8566762476969064584}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
+
         ToggleLamp(Input.GetKey(KeyCode.Space));
 
         Vector3 direction = Vector3.zero;
@@ -44,7 +47,7 @@ public class PlayerController : MonoBehaviour
         if (magnitude <= 0) return;
 
         _transform.rotation = Quaternion.RotateTowards(_transform.rotation, 
-            Quaternion.LookRotation(direction.normalized * 360f, Vector3.up), 300f * Time.deltaTime);
+                                Quaternion.LookRotation(direction.normalized * 360f, Vector3.up), 300f * Time.deltaTime);
     }
 
     void ToggleLamp(bool toggle)
