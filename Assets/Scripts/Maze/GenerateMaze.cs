@@ -241,11 +241,21 @@ public class GenerateMaze : MonoBehaviour
 
     void Awake()
     {
-        Generate();
+        Events.OnTriggerStartGame += OnTriggerStartGame;
     }
 
-    void Start()
+    private void OnDestroy()
     {
+        Events.OnTriggerStartGame -= OnTriggerStartGame;
+    }
+
+    void OnTriggerStartGame(int difficulty)
+    {
+        width = difficulty;
+        height = difficulty;
+
+        Generate();
+
         // Populate grid
         grid = new int[height, width];
 

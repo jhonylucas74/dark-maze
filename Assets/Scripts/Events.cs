@@ -2,6 +2,7 @@
 
 public static class Events
 {
+    public static IntEvent OnTriggerStartGame;
     public static Vector3Event OnMazeGenerated;
 
     public static SimpleEvent OnPasswordFound;

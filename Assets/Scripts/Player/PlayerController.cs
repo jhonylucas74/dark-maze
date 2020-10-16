@@ -5,8 +5,8 @@ using DG.Tweening;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float _speed = 10f;
-    [SerializeField] float _batteryLife = 5f;
-    [SerializeField] float _batteryDecayRatio;
+    float _batteryLife = 5f;
+    float _batteryDecayRatio;
     float _currentBattery;
 
     Transform _transform;
@@ -26,7 +26,14 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _lampLight = GetComponentInChildren<Light>();
 
-        _currentBattery = _batteryLife;
+        Events.OnTriggerStartGame += OnTriggerStartGame;
+        Events.OnMazeGenerated += OnMazeGenerated;
+    }
+
+    private void OnDestroy()
+    {
+        Events.OnTriggerStartGame -= OnTriggerStartGame;
+        Events.OnMazeGenerated -= OnMazeGenerated;
     }
 
     void Update()
@@ -112,5 +119,16 @@ public class PlayerController : MonoBehaviour
                 Events.OnDoorTouching?.Invoke(true);
             break;*/
         }
+    }
+
+    void OnTriggerStartGame(int difficulty)
+    {
+        _batteryLife = difficulty;
+        _currentBattery = _batteryLife;
+    }
+
+    private void OnMazeGenerated(Vector3 position)
+    {
+        _transform.position = position;
     }
 }
