@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] Transform _playerTransform;
+    [SerializeField] int _difficulty = 5;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         Events.OnMazeGenerated += OnMazeGenerated;
+    }
+
+    private void Start()
+    {
+        Events.OnTriggerStartGame?.Invoke(_difficulty);
     }
 
     private void OnDestroy()
@@ -16,6 +23,6 @@ public class GameManager : MonoBehaviour
 
     private void OnMazeGenerated(Vector3 position)
     {
-        _playerTransform.position = position;
+
     }
 }
