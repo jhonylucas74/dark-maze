@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         if (toggle)
         {
-            if (_batteryCoroutine == null && !_lampOn)
+            if (_currentBattery > 0f && _batteryCoroutine == null && !_lampOn)
                 _batteryCoroutine = StartCoroutine(BatteryRoutine());
         }
         else
@@ -118,8 +118,13 @@ public class PlayerController : MonoBehaviour
             _currentBattery -= _batteryDecayRatio * Time.deltaTime;
             Events.OnBatteryLampUpdate?.Invoke(_currentBattery / _batteryLife);
 
+            if (_currentBattery <= 0f)
+                break;
+
             yield return null;
         }
+
+        ToggleLamp(false);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)

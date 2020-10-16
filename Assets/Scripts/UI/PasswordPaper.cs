@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PasswordPaper : MonoBehaviour
 {
     public Gradient gradient;
+    public GameObject note;
 
     Image _image;
     TMP_Text _text;
@@ -18,7 +19,7 @@ public class PasswordPaper : MonoBehaviour
         Events.OnPasswordFound += OnPasswordFound;
         Events.OnLampIntensityUpdate += OnLampIntensityUpdate;
 
-        gameObject.SetActive(false);
+        note.SetActive(false);
     }
 
     private void OnDestroy()
@@ -35,7 +36,7 @@ public class PasswordPaper : MonoBehaviour
 
     void OnPasswordFound()
     {
-        gameObject.SetActive(true);
+        note.SetActive(true);
     }
 
     void OnLampIntensityUpdate(float value)
