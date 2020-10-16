@@ -6,7 +6,8 @@ public static class Events
     public static Vector3Event OnMazeGenerated;
 
     public static SimpleEvent OnPasswordFound;
-
+    public static SimpleEvent OnLightOn;
+    public static SimpleEvent OnLightOff;
     public static FloatEvent OnLampIntensityUpdate;
     public static FloatEvent OnBatteryLampUpdate;
     public static BoolEvent OnDoorTouching;
