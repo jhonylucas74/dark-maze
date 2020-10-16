@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5500275114198725637}
   - component: {fileID: 5500275114198725639}
   - component: {fileID: 5500275114198725638}
+  - component: {fileID: 6671715434737970853}
   m_Layer: 0
   m_Name: KeyCode
-  m_TagString: Untagged
+  m_TagString: KeyCode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4813,6 +4814,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!65 &6671715434737970853
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500275114198725636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.37875253, y: 0.37875253, z: 0.37875253}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8148132496419782310
 GameObject:
   m_ObjectHideFlags: 0
