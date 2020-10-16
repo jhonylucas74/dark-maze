@@ -157,8 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 1.5
-  _batteryLife: 5
-  _batteryDecayRatio: 0
+  _batteryDecayRatio: 0.2
 --- !u!1001 &8566762477273517744
 PrefabInstance:
   m_ObjectHideFlags: 0

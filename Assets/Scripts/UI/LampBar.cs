@@ -22,6 +22,8 @@ public class LampBar : MonoBehaviour
     private void OnDestroy()
     {
         Events.OnBatteryLampUpdate -= OnBatteryLampUpdate;
+        Events.OnLightOn -= OnLightOn;
+        Events.OnLightOff -= OnLightOff;
     }
 
     void OnLightOn () {

@@ -317,7 +317,7 @@ public class GenerateMaze : MonoBehaviour
 
         Instantiate(keyPrefab, _key + Vector3.up * 0.25f, Quaternion.identity);
 
-        Events.OnMazeGenerated?.Invoke(tCorners[0]);
+        GameManager.Instance.OnMazeGenerated(_entrance);
     }
 
     void PopulateProps () {
