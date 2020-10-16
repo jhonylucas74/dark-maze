@@ -706,6 +706,15 @@ MonoBehaviour:
     type: 3}
   width: 8
   height: 8
+  vertices: []
+  props:
+  - {fileID: 2744870251148979109, guid: 0cd4109c67a97a343b06c4ad34ca3378, type: 3}
+  - {fileID: 2760496628635747868, guid: 030b03977f3fe8e4ca957ab8dd1b5662, type: 3}
+  - {fileID: 1825215971688260931, guid: 89c45b8266991d343b488e26753304cd, type: 3}
+  - {fileID: 6867836989876867333, guid: 0c1d7cb06ada03c4d82fe1ce3d50be3e, type: 3}
+  - {fileID: 1130486690977233008, guid: 1298cd44c149163408c6caf6b7898d6e, type: 3}
+  - {fileID: 1833895385411855022, guid: 1468fa80fc865254b872d86c4bbb3ca5, type: 3}
+  - {fileID: 3550940186505172904, guid: abe89c70048f54042aea2151b033ee5a, type: 3}
 --- !u!4 &1270121675
 Transform:
   m_ObjectHideFlags: 0

@@ -27,10 +27,13 @@ public class GenerateMaze : MonoBehaviour
 
     int[,] grid;
 
-    private Vector3[] vertices;
+    [HideInInspector]
+    public Vector3[] vertices;
     private Mesh mesh;
 
     Vector3 _entrance, _key, _exit;
+
+    public GameObject[] props;
 
     int[] getRandomDirections()
     {
@@ -270,6 +273,7 @@ public class GenerateMaze : MonoBehaviour
         CarvePassagesFrom(0, 0, grid);
         //printMaze();
         BuildMazeWalls();
+        PopulateProps();
 
         BoxCollider collider = GetComponent<BoxCollider>();
         collider.size = new Vector3(width, 0.1f, height);
@@ -314,5 +318,18 @@ public class GenerateMaze : MonoBehaviour
         Instantiate(keyPrefab, _key + Vector3.up * 0.25f, Quaternion.identity);
 
         Events.OnMazeGenerated?.Invoke(tCorners[0]);
+    }
+
+    void PopulateProps () {
+        int totalProps = Random.Range(10, (width * height) - width);
+
+        for (int i = 0; i < totalProps; i++) {
+            int j = Random.Range(0, vertices.Length - (width + 1));
+
+            if ((j + 1) % (width + 1) != 0) {
+                Vector3 vert = vertices[j];
+                Instantiate(props[Random.Range(0, 6)], new Vector3(vert.x + 0.5f, 0.1f, vert.z + 0.5f), Quaternion.identity);
+            }
+        }
     }
 }
