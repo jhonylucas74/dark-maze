@@ -2,8 +2,12 @@
 
 public static class Events
 {
+    public static SimpleEvent OnLeaveGame;
+
     public static IntEvent OnTriggerStartGame;
+    public static SimpleEvent OnGameStart;
     public static Vector3Event OnMazeGenerated;
+    public static SimpleEvent OnGameEnd;
 
     public static SimpleEvent OnPasswordFound;
     public static SimpleEvent OnLightOn;

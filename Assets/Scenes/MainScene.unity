@@ -202,77 +202,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8566762477210777426}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &569440819
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 569440820}
-  - component: {fileID: 569440822}
-  - component: {fileID: 569440821}
-  m_Layer: 5
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &569440820
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569440819}
-  m_LocalRotation: {x: -0, y: -0, z: -0.009329205, w: 0.99995655}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 796755819}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.069}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 322, y: -6}
-  m_SizeDelta: {x: 241.35803, y: 236.651}
-  m_Pivot: {x: 0, y: 0.5}
---- !u!114 &569440821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569440819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 8400000, guid: f3ac71ccf2de0fc47841459173715609, type: 2}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
---- !u!222 &569440822
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569440819}
-  m_CullTransparentMesh: 0
 --- !u!1 &796755813 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3944793477618239067, guid: f20da24547a356940b77b39c9707d896,
@@ -291,12 +220,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!224 &796755819 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3944793477618239063, guid: f20da24547a356940b77b39c9707d896,
-    type: 3}
-  m_PrefabInstance: {fileID: 3944793477032378686}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &870734971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,6 +1468,11 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2964444097009720568, guid: f20da24547a356940b77b39c9707d896,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3245162233458902427, guid: f20da24547a356940b77b39c9707d896,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1754,6 +1682,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DoorPasswordCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3944793477618239067, guid: f20da24547a356940b77b39c9707d896,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4032554892211604769, guid: f20da24547a356940b77b39c9707d896,
         type: 3}
@@ -2159,10 +2092,20 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4309734124247620546, guid: 5572e9cb6cac32f4dad3e2ca1e71dabe,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4309734124369180481, guid: 5572e9cb6cac32f4dad3e2ca1e71dabe,
         type: 3}
       propertyPath: m_Name
       value: UICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309734124369180481, guid: 5572e9cb6cac32f4dad3e2ca1e71dabe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4309734124369180485, guid: 5572e9cb6cac32f4dad3e2ca1e71dabe,
         type: 3}
@@ -2328,11 +2271,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 8566762476969064584, guid: e67fddd0423a097409bf59a6f1189802,
-        type: 3}
-      propertyPath: _batteryDecayRatio
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 8566762476969064586, guid: e67fddd0423a097409bf59a6f1189802,
         type: 3}
       propertyPath: m_Name
@@ -2342,6 +2280,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8566762476969064586, guid: e67fddd0423a097409bf59a6f1189802,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8566762476969064587, guid: e67fddd0423a097409bf59a6f1189802,
         type: 3}

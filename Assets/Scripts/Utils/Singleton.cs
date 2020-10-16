@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour
 {
@@ -17,5 +15,17 @@ public class Singleton<T> : MonoBehaviour
 
         _instance = GetComponent<T>();
         DontDestroyOnLoad(gameObject);
+
+        Events.OnLeaveGame += OnLeaveGame;
+    }
+
+    private void OnDestroy()
+    {
+        Events.OnLeaveGame -= OnLeaveGame;
+    }
+
+    void OnLeaveGame()
+    {
+        Destroy(gameObject);
     }
 }

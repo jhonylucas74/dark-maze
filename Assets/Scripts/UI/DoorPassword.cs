@@ -6,14 +6,18 @@ public class DoorPassword : MonoBehaviour
 {
     const int PASSWORD_SIZE = 4;
 
+    AudioSource _audioSrc;
     CanvasGroup _canvasGroup;
     [SerializeField] TMP_Text _passwordText;
+    [SerializeField] AudioClip _correctSfx;
+    [SerializeField] AudioClip _wrongSfx;
 
     string _generatedPassword;
     string _password = string.Empty;
 
     private void Awake()
     {
+        _audioSrc = GetComponent<AudioSource>();
         _canvasGroup = GetComponent<CanvasGroup>();
 
         for (int i = 0; i < PASSWORD_SIZE; i++)
@@ -30,6 +34,7 @@ public class DoorPassword : MonoBehaviour
 
     private void OnDestroy()
     {
+        _canvasGroup.DOKill();
         Events.OnDoorTouching -= OnDoorTouching;
         Events.OnPasswordButtonPress -= OnButtonPress;
     }
@@ -63,7 +68,20 @@ public class DoorPassword : MonoBehaviour
 
         if(_password.Length >= PASSWORD_SIZE)
         {
-            Debug.Log(_password == _generatedPassword ? "Correct" : "Wrong");
+            if (_password == _generatedPassword)
+            {
+                _canvasGroup.interactable = false;
+
+                _audioSrc.clip = _correctSfx;
+                _audioSrc.Play();
+
+                GameManager.Instance.TriggerNextLevel();
+            }
+            else
+            {
+                _audioSrc.clip = _wrongSfx;
+                _audioSrc.Play();
+            }
         }
     }
 }

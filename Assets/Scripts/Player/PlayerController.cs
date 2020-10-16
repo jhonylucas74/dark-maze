@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float _speed = 10f;
+    [SerializeField] float _batteryDecayRatio = 0.2f;
     float _batteryLife = 5f;
-    float _batteryDecayRatio;
     float _currentBattery;
 
     Transform _transform;
@@ -14,10 +15,9 @@ public class PlayerController : MonoBehaviour
     Animator _animator;
     Light _lampLight;
 
+    bool _playing;
     bool _lampOn;
     Coroutine _batteryCoroutine;
-
-    bool _hasCode;
 
     private void Awake()
     {
@@ -26,26 +26,32 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _lampLight = GetComponentInChildren<Light>();
 
+        Events.OnGameStart += OnGameStart;
+        Events.OnGameEnd += OnGameEnd;
         Events.OnTriggerStartGame += OnTriggerStartGame;
         Events.OnMazeGenerated += OnMazeGenerated;
     }
 
     private void OnDestroy()
     {
+        Events.OnGameStart -= OnGameStart;
+        Events.OnGameEnd -= OnGameEnd;
         Events.OnTriggerStartGame -= OnTriggerStartGame;
         Events.OnMazeGenerated -= OnMazeGenerated;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
+        if (!_playing)
+            return;
 
         RaycastHit raycastHit;
         Ray ray = new Ray(_transform.position, _transform.forward);
         if(Physics.Raycast(ray, out raycastHit, Mathf.Infinity, 1 << LayerMask.NameToLayer("AlwaysLit")))
             if(raycastHit.distance - 0.3f <= 0.1f)
                 Events.OnDoorTouching?.Invoke(raycastHit.collider.tag == "Door");
+            else
+                Events.OnDoorTouching?.Invoke(false);
         else
                 Events.OnDoorTouching?.Invoke(false);
 
@@ -65,6 +71,16 @@ public class PlayerController : MonoBehaviour
 
         _transform.rotation = Quaternion.RotateTowards(_transform.rotation, 
                                 Quaternion.LookRotation(direction.normalized * 360f, Vector3.up), 300f * Time.deltaTime);
+    }
+
+    void OnGameStart()
+    {
+        _playing = true;
+    }
+
+    void OnGameEnd()
+    {
+        _playing = false;
     }
 
     void ToggleLamp(bool toggle)
@@ -111,7 +127,6 @@ public class PlayerController : MonoBehaviour
         switch(hit.collider.tag)
         {
             case "KeyCode":
-                _hasCode = true;
                 hit.collider.gameObject.SetActive(false);
                 Events.OnPasswordFound?.Invoke();
             break;
@@ -129,6 +144,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnMazeGenerated(Vector3 position)
     {
-        _transform.position = position;
+        _transform.position = position + Vector3.up * 0.5f;
     }
 }
