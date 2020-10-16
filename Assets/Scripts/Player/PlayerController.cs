@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     CharacterController _characterController;
     Animator _animator;
     Light _lampLight;
+    AudioSource _audioSrc;
 
     bool _playing;
     bool _lampOn;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
         _lampLight = GetComponentInChildren<Light>();
+        _audioSrc = GetComponent<AudioSource>();
 
         Events.OnGameStart += OnGameStart;
         Events.OnGameEnd += OnGameEnd;
@@ -132,6 +134,7 @@ public class PlayerController : MonoBehaviour
         switch(hit.collider.tag)
         {
             case "KeyCode":
+                _audioSrc.Play();
                 hit.collider.gameObject.SetActive(false);
                 Events.OnPasswordFound?.Invoke();
             break;
