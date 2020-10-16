@@ -8,7 +8,6 @@ public class DoorPassword : MonoBehaviour
 
     CanvasGroup _canvasGroup;
     [SerializeField] TMP_Text _passwordText;
-    [SerializeField] TMP_Text _paperText;
 
     string _generatedPassword;
     string _password = string.Empty;
@@ -20,10 +19,13 @@ public class DoorPassword : MonoBehaviour
         for (int i = 0; i < PASSWORD_SIZE; i++)
             _generatedPassword += Random.Range(0, 9);
 
-        _paperText.text = _generatedPassword;
-
         Events.OnDoorTouching += OnDoorTouching;
         Events.OnPasswordButtonPress += OnButtonPress;
+    }
+
+    private void Start()
+    {
+        Events.OnPasswordGenerated?.Invoke(_generatedPassword);
     }
 
     private void OnDestroy()
@@ -36,7 +38,7 @@ public class DoorPassword : MonoBehaviour
     {
         _canvasGroup.interactable = toggle;
         _canvasGroup.blocksRaycasts = toggle;
-        _canvasGroup.DOFade(toggle ? 1f : 0f, 1f).Play();
+        _canvasGroup.DOFade(toggle ? 1f : 0f, 0.5f).Play();
     }
 
     void OnButtonPress(string key)

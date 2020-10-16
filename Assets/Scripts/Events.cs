@@ -10,6 +10,7 @@ public static class Events
     public static FloatEvent OnBatteryLampUpdate;
     public static BoolEvent OnDoorTouching;
 
+    public static StringEvent OnPasswordGenerated;
     public static StringEvent OnPasswordButtonPress;
 }
 
