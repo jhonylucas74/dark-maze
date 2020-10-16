@@ -27,12 +27,12 @@ public class BGMManager : Singleton<BGMManager>
     }
 
     void OnLightOn () {
-        _LightThemeAudio.volume = 0.5f;
+        _LightThemeAudio.volume = 0.3f;
         _GameThemeAudio.volume = 0;
     }
 
     void OnLightOff () {
         _LightThemeAudio.volume = 0;
-        _GameThemeAudio.volume = 0.5f;
+        _GameThemeAudio.volume = 0.3f;
     }
 }
