@@ -11,13 +11,13 @@ public class BGMManager : Singleton<BGMManager>
     protected override void Awake()
     {
         base.Awake();
-        Events.OnLightOn += OnLightOn;
-        Events.OnLightOff += OnLightOff;
+        //Events.OnLightOn += OnLightOn;
+        //Events.OnLightOff += OnLightOff;
     }
 
     void OnDestroy () {
-        Events.OnLightOn -= OnLightOn;
-        Events.OnLightOff -= OnLightOff;
+        //Events.OnLightOn -= OnLightOn;
+        //Events.OnLightOff -= OnLightOff;
     }
 
     void Start ()
