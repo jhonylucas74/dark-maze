@@ -3,8 +3,9 @@
 public static class Events
 {
     public static Vector3Event OnMazeGenerated;
-
     public static FloatEvent OnBatteryLampUpdate;
+    public static SimpleEvent OnLightOn;
+    public static SimpleEvent OnLightOff;
 }
 
 public delegate void SimpleEvent();

@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
             if (_batteryCoroutine != null && _lampOn)
             {
                 _lampOn = false;
+                Events.OnLightOff?.Invoke();
                 _lampLight.DOIntensity(0f, 0.5f).OnComplete(() =>
                 {
                     StopCoroutine(_batteryCoroutine);
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         _lampOn = true;
         _lampLight.DOIntensity(1f, 0.25f).SetEase(Ease.OutSine).Play();
+        Events.OnLightOn?.Invoke();
 
         while(true)
         {
